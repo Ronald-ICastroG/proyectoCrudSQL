@@ -5,7 +5,7 @@ public class Employee {
     private Integer empId;
     private String empFirstName;
 
-    private String empSurName;
+    private String empPSurName;
 
     private String empMSurName;
 
@@ -17,10 +17,10 @@ public class Employee {
 
     }
 
-    public Employee(Integer empId, String empFirstName, String empSurName, String empMSurName, String empEmail, Float empSalary) {
+    public Employee(Integer empId, String empFirstName, String empPSurName, String empMSurName, String empEmail, Float empSalary) {
         this.empId = empId;
         this.empFirstName = empFirstName;
-        this.empSurName = empSurName;
+        this.empPSurName = empPSurName;
         this.empMSurName = empMSurName;
         this.empEmail = empEmail;
         this.empSalary = empSalary;
@@ -43,12 +43,12 @@ public class Employee {
         this.empFirstName = empFirstName;
     }
 
-    public String getEmpSurName() {
-        return empSurName;
+    public String getEmpPSurName() {
+        return empPSurName;
     }
 
-    public void setEmpSurName(String empSurName) {
-        this.empSurName = empSurName;
+    public void setEmpPSurName(String empPSurName) {
+        this.empPSurName = empPSurName;
     }
 
     public String getEmpMSurName() {
@@ -80,7 +80,7 @@ public class Employee {
         return "Employee{" +
                 "empId=" + empId +
                 ", empFirstName='" + empFirstName + '\'' +
-                ", empSurName='" + empSurName + '\'' +
+                ", empSurName='" + empPSurName + '\'' +
                 ", empMSurName='" + empMSurName + '\'' +
                 ", empEmail='" + empEmail + '\'' +
                 ", empSalary=" + empSalary +
