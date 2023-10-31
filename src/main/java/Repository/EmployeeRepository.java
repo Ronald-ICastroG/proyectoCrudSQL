@@ -22,7 +22,8 @@ public class EmployeeRepository implements Repository<Employee> {
 
 
             while (rs.next()) {
-                createEmployee(rs, employees);
+                Employee e=createEmployee(rs);
+                employees.add(e);
             }
         }
         return employees;
@@ -38,7 +39,7 @@ public class EmployeeRepository implements Repository<Employee> {
             try(ResultSet rs=ps.executeQuery()){
                 if(rs.next()) {
                     employee=createEmployee(rs);
-            }
+                }
             }
         }
         return employee;
@@ -53,7 +54,7 @@ public class EmployeeRepository implements Repository<Employee> {
 
     }
 
-    private Employee createEmployee(ResultSet rs, List<Employee> employees) throws SQLException {
+    private Employee createEmployee(ResultSet rs) throws SQLException {
             Employee e=new Employee();
             e.setEmpId(rs.getInt("emp_id"));
             e.setEmpFirstName(rs.getString("emp_firstName"));
