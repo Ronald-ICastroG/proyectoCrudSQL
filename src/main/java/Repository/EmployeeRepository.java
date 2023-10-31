@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeRepository implements Repository<Employee> {
+   public static final String SQL_SAVE="INSERT INTO employees (emp_firstName,emp_PSurName,emp_MSurName,emp_email,emp_salary) vALUES(?,?,?,?,?)";
 
 
 
@@ -46,7 +47,19 @@ public class EmployeeRepository implements Repository<Employee> {
     }
 
     @Override
-    public void save(Employee employee) {
+    public void save(Employee employee) throws SQLException {
+        try(PreparedStatement ps =getConnection().prepareStatement(SQL_SAVE)){
+            ps.setString(1, employee.getEmpFirstName());
+            ps.setString(2, employee.getEmpPSurName());
+            ps.setString(3, employee.getEmpMSurName());
+            ps.setString(4,employee.getEmpEmail());
+            ps.setFloat(5,employee.getEmpSalary());
+
+
+            int rowsAffected=ps.executeUpdate();
+            System.out.println("Registros insertados: "+rowsAffected);
+        }
+
 
     }
     @Override
