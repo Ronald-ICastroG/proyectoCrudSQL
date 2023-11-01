@@ -16,6 +16,13 @@ public class Employee {
     public Employee(){
 
     }
+    public Employee(String empFirstName, String empPSurName, String empMSurName, String empEmail, Float empSalary){
+        this.empFirstName = empFirstName;
+        this.empPSurName = empPSurName;
+        this.empMSurName = empMSurName;
+        this.empEmail = empEmail;
+        this.empSalary = empSalary;
+    }
 
     public Employee(Integer empId, String empFirstName, String empPSurName, String empMSurName, String empEmail, Float empSalary) {
         this.empId = empId;

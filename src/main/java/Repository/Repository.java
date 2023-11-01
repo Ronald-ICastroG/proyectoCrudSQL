@@ -11,5 +11,5 @@ public interface Repository <T> {
 
     void save(T t) throws SQLException;
 
-    void delete(Integer id);
+    void delete(Integer id) throws SQLException;
 }

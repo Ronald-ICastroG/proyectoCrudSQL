@@ -9,8 +9,9 @@ import java.util.List;
 
 public class EmployeeRepository implements Repository<Employee> {
    public static final String SQL_SAVE="INSERT INTO employees (emp_firstName,emp_PSurName,emp_MSurName,emp_email,emp_salary) vALUES(?,?,?,?,?)";
+   public static final String SQL_UPDATE="UPDATE employees set emp_firstName=?,emp_PSurName=?,emp_MSurName=?,emp_email=?,emp_salary=? WHERE emp_id=?";
 
-
+   public static final String SQL_DELETE="DELETE FROM employees WHERE emp_id=?";
 
     private Connection getConnection() throws SQLException {
         return DatabaseConnection.getInstance();
@@ -48,13 +49,23 @@ public class EmployeeRepository implements Repository<Employee> {
 
     @Override
     public void save(Employee employee) throws SQLException {
-        try(PreparedStatement ps =getConnection().prepareStatement(SQL_SAVE)){
+        String sql;
+        if(employee.getEmpId()!=null && employee.getEmpId()>0){
+          sql=SQL_UPDATE;
+            System.out.println("/----------Actualizando un registro-------------/\n");
+        }else{
+            sql=SQL_SAVE;
+            System.out.println("/----------Insertando un registro-------------/\n");
+        }
+        try(PreparedStatement ps =getConnection().prepareStatement(sql)){
             ps.setString(1, employee.getEmpFirstName());
             ps.setString(2, employee.getEmpPSurName());
             ps.setString(3, employee.getEmpMSurName());
             ps.setString(4,employee.getEmpEmail());
             ps.setFloat(5,employee.getEmpSalary());
-
+            if(employee.getEmpId()!=null&&employee.getEmpId()>0){
+                ps.setInt(6,employee.getEmpId());
+            }
 
             int rowsAffected=ps.executeUpdate();
             System.out.println("Registros insertados: "+rowsAffected);
@@ -63,7 +74,15 @@ public class EmployeeRepository implements Repository<Employee> {
 
     }
     @Override
-    public void delete(Integer id) {
+    public void delete(Integer id) throws SQLException {
+
+        String sql=SQL_DELETE;
+
+        try(PreparedStatement ps=getConnection().prepareStatement(sql)){
+            ps.setInt(1, id);
+            int rowsAffected=ps.executeUpdate();
+            System.out.println(rowsAffected+" registros eliminados...");
+        }
 
     }
 

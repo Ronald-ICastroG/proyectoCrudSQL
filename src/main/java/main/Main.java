@@ -35,18 +35,29 @@ public class Main {
             //ver si el cambio se está ejecutando, primero con un findall()
             repository.findAll().forEach(System.out::println);
 
+/*
+            System.out.println("----------- Actualizando un empleado -------------");
 
-            System.out.println("----------- Insertando un empleado -------------");
             Employee employee=new Employee();
-            employee.setEmpFirstName("Camilo");
-            employee.setEmpPSurName("Ardila");
-            employee.setEmpMSurName("Toloza");
-            employee.setEmpEmail("miloca@hotmail.com");
-            employee.setEmpSalary(3_330_000F);
+            employee.setEmpId(7);
+            employee.setEmpFirstName("Ricardo");
+            employee.setEmpPSurName("García");
+            employee.setEmpMSurName("Cristancho");
+            employee.setEmpEmail("rigacri@hotmail.com");
+            employee.setEmpSalary(6_800_000F);
             //método save implementado
             repository.save(employee);
 
-            System.out.println("-----Nuevo empleado insertado-----");
+            System.out.println("----- empleado actualizado-----");
+            repository.findAll().forEach(System.out::println);
+            */
+
+
+            repository.delete(4);
+            System.out.println(".....................Empleado eliminado.....................\n");
+
+            repository.findAll().forEach(System.out::println);
+
 
         } catch (SQLException e) {
             e.printStackTrace(System.out);
