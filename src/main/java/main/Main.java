@@ -53,7 +53,7 @@ public class Main {
             */
 
 
-            repository.delete(4);
+            repository.delete(7);
             System.out.println(".....................Empleado eliminado.....................\n");
 
             repository.findAll().forEach(System.out::println);
