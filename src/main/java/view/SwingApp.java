@@ -28,6 +28,25 @@ public class SwingApp extends JFrame {
         JButton eliminarButton=new JButton("Eliminar");
 
         //Configurar el panel de botones
+        JPanel buttonPanel=new JPanel();
+        buttonPanel.add(agregarButton);
+        buttonPanel.add(actualizarButton);
+        buttonPanel.add(eliminarButton);
+        add(buttonPanel,BorderLayout.SOUTH);
+
+        //Establecer estilos para los botones
+        agregarButton.setBackground(new Color(46,204,113));
+        agregarButton.setForeground(Color.WHITE);
+        agregarButton.setFocusPainted(false);
+
+        actualizarButton.setBackground(new Color(52,152,219));
+        actualizarButton.setForeground(Color.WHITE);
+        actualizarButton.setFocusPainted(false);
+
+        eliminarButton.setBackground(new Color(231,76,60));
+        eliminarButton.setForeground(Color.WHITE);
+        eliminarButton.setFocusPainted(false);
+
 
     }
 }
