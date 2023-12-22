@@ -3,17 +3,23 @@ package main;
 import Repository.*;
 import model.Employee;
 import util.DatabaseConnection;
+import view.SwingApp;
 
 import java.sql.*;
 
 public class Main {
 
-    public static Statement stmt=null;
-    public static PreparedStatement ps=null;
-    public static ResultSet rs=null;
+
+    //public static Statement stmt=null;
+    //public static PreparedStatement ps=null;
+    //public static ResultSet rs=null;
 
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
+
+    SwingApp app= new SwingApp();
+    app.setVisible(true);
+        /*
         try (Connection conn= DatabaseConnection.getInstance()){
             Repository<Employee> repository=new EmployeeRepository();
 
@@ -32,8 +38,8 @@ public class Main {
             }
 */
 
-            //ver si el cambio se está ejecutando, primero con un findall()
-            repository.findAll().forEach(System.out::println);
+        //ver si el cambio se está ejecutando, primero con un findall()
+        //repository.findAll().forEach(System.out::println);
 
 /*
             System.out.println("----------- Actualizando un empleado -------------");
@@ -50,7 +56,7 @@ public class Main {
 
             System.out.println("----- empleado actualizado-----");
             repository.findAll().forEach(System.out::println);
-            */
+
 
 
             repository.delete(7);
@@ -64,5 +70,8 @@ public class Main {
             System.out.println("X-| Algo salió mal, revise los parámetros de conexión");
         }
 
+
+    }
+    */
     }
 }
