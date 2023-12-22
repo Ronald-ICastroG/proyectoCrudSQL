@@ -110,7 +110,87 @@ public class SwingApp extends JFrame {
 
     }
 
-    private void agregarEmpleado(){
-        
+    private void agregarEmpleado() throws SQLException {
+//Crear un formulario para agregar empleado
+        JTextField nombreField=new JTextField();
+        JTextField paternoField=new JTextField();
+        JTextField maternoField=new JTextField();
+        JTextField emailField=new JTextField();
+        JTextField salarioField=new JTextField();
+
+        Object[] fields={
+                "Nombre:",nombreField,
+                "Apellido Paterno",paternoField,
+                "Apellido Materno",maternoField,
+                "Email",emailField,
+                "Salario",salarioField
+        };
+
+        int result=JOptionPane.showConfirmDialog(this,fields,"Agregar EMpleado",JOptionPane.OK_OPTION);
+
+        if(result==JOptionPane.OK_OPTION){
+            //Crear un nuevo objeto Employee con los datos ingresados
+            Employee employee=new Employee();
+            employee.setEmpFirstName(nombreField.getText());
+            employee.setEmpPSurName(paternoField.getText());
+            employee.setEmpMSurName(maternoField.getText());
+            employee.setEmpEmail(emailField.getText());
+            employee.setEmpSalary(Float.parseFloat(salarioField.getText()));
+
+            //Gueardar el nuevo empleado en la bd
+            employeeRepository.save(employee);
+
+            //Actualizar la tabla con los empleados actualizados
+            refreshEmployeeTable();
+
+            JOptionPane.showMessageDialog(this,"Empleado agregado correctamente","éxito",JOptionPane.OK_OPTION);
+        }
+    }
+
+    private void actualizarEmpleado() throws SQLException {
+        //Obtener el Id del empleado a actualizar
+        String empleadoIdStr=JOptionPane.showInputDialog(this,"Ingrese el id del empleado","Actualizar",JOptionPane.OK_OPTION);
+        if(empleadoIdStr!=null){
+            int empleadoId=Integer.parseInt(empleadoIdStr);
+
+            //Obtener el empleado desde la base de datos
+
+            Employee empleado=employeeRepository.getById(empleadoId);
+
+            if(empleado!=null){
+                //Crear un formulario con los datos del empleado
+                JTextField nombreField=new JTextField(empleado.getEmpFirstName());
+                JTextField apellidoPaternoField=new JTextField(empleado.getEmpPSurName());
+                JTextField apellidoMaternoField=new JTextField(empleado.getEmpMSurName());
+                JTextField emailField=new JTextField(empleado.getEmpEmail());
+                JTextField salarioField=new JTextField(String.valueOf(empleado.getEmpSalary()));
+
+                Object[] fields={
+                        "Nombre",nombreField,
+                        "Apellido paterno",apellidoPaternoField,
+                        "Apellido materno",apellidoMaternoField,
+                        "Email",emailField,
+                        "Salario:",salarioField
+                };
+
+                int confirmResult=JOptionPane.showConfirmDialog(this,fields,"Actualizar Empleado",JOptionPane.OK_OPTION);
+                if(confirmResult==JOptionPane.OK_OPTION){
+                    //Actualizar los datos del empleado con los valores ingresados en el formulario
+                    empleado.setEmpFirstName(nombreField.getText());
+                    empleado.setEmpPSurName(apellidoPaternoField.getText());
+                    empleado.setEmpMSurName(apellidoMaternoField.getText());
+                    empleado.setEmpEmail(emailField.getText());
+                    empleado.setEmpSalary(Float.parseFloat(salarioField.getText()));
+
+                    //Guardar los cambios en la base de datos
+                    employeeRepository.save(empleado);
+
+                    //Actualizar la tabla de empleados en la interfaz
+                    refreshEmployeeTable();
+                }
+            }else{
+                JOptionPane.showMessageDialog(this,"No se encontró ningún empleado con el ID estipulado");
+            }
+        }
     }
 }
